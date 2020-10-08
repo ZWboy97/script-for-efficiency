@@ -6,3 +6,8 @@
 - word_handler: 通过python语言来批量从多个word文档中提取信息，并导出到Excel中。
     - 批量.doc转.docx
     - Word中读取表格信息
+- [tiled_video_handler](./Python/tiled_video_handler/README.md)：用于全景视频的分块传输，实现将全视角的全景视频切分成多个tile，并将每个tile生成多个不同质量的版本，并以Dash进行自适应传输
+    - 批量对多个视频进行crop切割和加文字水印操作
+    - 批量对多个视频进行多码率转换
+    - 批量对多个视频进行Dash切片
+    - 批量对多组Dash切片生成.mpd文件
