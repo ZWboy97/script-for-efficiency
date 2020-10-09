@@ -18,8 +18,8 @@ def get_video_list(dir_path):
     return video_list
 
 
-def create_output_dir(dir_path, file_name):
-    path = dir_path + file_name
+def create_output_dir(dir_path):
+    path = dir_path
     path = path.rstrip("\\")
     isExists = os.path.exists(path)
     if not isExists:
@@ -31,23 +31,38 @@ def create_output_dir(dir_path, file_name):
         return False
 
 
-def crop(video_path, width, height, x, y, output_path, mark):
+def crop(video_path, width, height, x, y, output_path):
     res = cmder.runCmd(
-        f'ffmpeg -i {video_path} -vf crop={width}:{height}:{x}:{y},drawtext=fontcolor=white:fontsize=40:text=\'{mark}\':x=10:y=10 {output_path} -y')
+        f'ffmpeg -i {video_path} -vf crop={width}:{height}:{x}:{y} {output_path} -y')
     if res == -1:
         os._exit(-1)
 
 
 def crop_video(video_dir, name, output_dir):
+    # 为该视频创建总文件夹
+    root_dir_name = name.replace(".mp4", "") + "\\"
+    res = create_output_dir(output_dir + root_dir_name)
+    # 生成Base低质量版本
+    generate_base_video(video_dir + name, output_dir +
+                        root_dir_name + "base.mp4")
+    # 创建存储tile视频的文件夹
+    tile_temp_dir = root_dir_name + "tile_temp\\"
+    res = create_output_dir(output_dir+tile_temp_dir)
     for i in range(0, 4):
         for j in range(0, 3):
             x = TILE_WIDTH * i
             y = TILE_HEIGHT * j
-            dir_name = name+"\\"+"tile_"+str(i)+"_"+str(j)+"\\"
-            res = create_output_dir(output_dir, dir_name)
-            output_path = output_dir + dir_name + "L0.mp4"
+            tile_name = "tile_"+str(i)+"_"+str(j)+".mp4"
+            output_path = output_dir + tile_temp_dir + tile_name
             crop(video_dir+name, TILE_WIDTH, TILE_HEIGHT,
-                 x, y, output_path, f'Tile({i}-{j})-L0')
+                 x, y, output_path)
+
+
+def generate_base_video(video_path, output_path):
+    res = cmder.runCmd(
+        f'ffmpeg -i {video_path} -vf scale=540x360 {output_path}')
+    if res == -1:
+        os._exit(-1)
 
 
 def start_crop_videos(video_dir, output_dir):
