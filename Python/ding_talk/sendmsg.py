@@ -1,4 +1,8 @@
-import requests
+try:
+    import requests
+except ImportError:
+    import os
+    os.system('pip3 install requests')
 import json
 
 # 这个 url 从 PC 端钉钉群组->管理机器人里获得
