@@ -17,6 +17,3 @@ def start_all_task():
     # 启动无人车拉流
     pull_car_video = "ffmpeg "
     run.runCmdWithRetry(pull_pano_video, "无人车原视拉流+转码")
-
-
-def start_monitor_task():

@@ -27,7 +27,7 @@ def runCmdWithRetry(command, task_name, try_count=0, last_run_time=time.time(), 
     # 连续重启次数超过5次，则钉钉通知
     if try_count == 5:
         dingmsg.sendMsg(
-            f'Task-{task_name}：最近30分钟内异常重启次数达5次，服务已停止，请检查日志。\n错误信息:{errmsg}', ['18811798021'])
+            f'Task-{task_name}：最近30分钟内异常重启次数达5次，服务已停止，请检查日志。\n错误信息:{errmsg}', ['188****8021'])
         return
     # 更新 last_run_time
     last_run_time = time.time()
