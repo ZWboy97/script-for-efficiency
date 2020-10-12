@@ -19,6 +19,13 @@ def sendMsg(msg, atList=[]):
             "atMobiles": atList
         }
     }
-    r = requests.post(dingding_url, headers=headers,
-                      data=json.dumps(post_data))
+    try:
+        r = requests.post(dingding_url, headers=headers,
+                          data=json.dumps(post_data), timeout=5)
+    except requests.Timeout:
+        return None
+    except requests.ConnectionError:
+        return None
+    except Exception:
+        return None
     print(r.content)
