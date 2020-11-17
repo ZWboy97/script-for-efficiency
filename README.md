@@ -16,3 +16,8 @@
     - 使用python执行命令行，启动服务
     - 服务异常退出时，自动重试
     - 服务异常通过钉钉机器人，发送到钉钉群组
+    
+## Shell
+- [oh_my zsh_installer](./Shell/install-zsh/README.md): 一个顺手的命令行环境能有效提升效率，解决新服务器如何快速配置oh-my-zsh的问题
+    - 脚本安装oh-my-zsh
+    - 配置oh-my-zsh主题
