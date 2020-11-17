@@ -20,7 +20,7 @@ def buleStr(str):
 def runCmd(command):
     print(buleStr('[Runing]:'+command))
     subp = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE, encoding="utf-8")
+                            stderr=subprocess.PIPE)
     res = subp.communicate()
     if subp.poll() == 0:
         print(res[0])

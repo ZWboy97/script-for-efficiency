@@ -13,7 +13,7 @@ def create_dir(path):
         return False
 
 
-def get_dirs_in_path(root_dir):
+def get_dirs_path_in_path(root_dir):
     dir_list = []
     isExists = os.path.exists(root_dir)
     if isExists == False:
@@ -21,6 +21,18 @@ def get_dirs_in_path(root_dir):
     for dirpath, dirnames, filenames in os.walk(root_dir):
         for dirname in dirnames:
             dir_list.append(os.path.join(dirpath, dirname))
+        break
+    return dir_list
+
+
+def get_dirs_in_path(root_dir):
+    dir_list = []
+    isExists = os.path.exists(root_dir)
+    if isExists == False:
+        return dir_list
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        for dirname in dirnames:
+            dir_list.append(dirname)
         break
     return dir_list
 
